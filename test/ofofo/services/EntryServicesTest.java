@@ -29,5 +29,25 @@ public class EntryServicesTest {
         assertEquals(1, entryRepository.count());
         entryServices.save("Books I need To Read", "The Subtle Art Of Not Giving A Fuck");
         assertEquals(2, entryRepository.count());
+        String expected = "The Subtle Art Of Not Giving A Fuck";
+        assertEquals(expected, entryServices.findByTitle("Books I need To Read").getContent());
+    }
+
+    @Test
+    public void test_That_An_Exception_Is_Thrown_When_An_Entry_That_Does_Not_Exist_Is_Searched(){
+        entryServices.save("Story Of My Life", "First Day I Met My Wife");
+        assertEquals(1, entryRepository.count());
+        entryServices.save("Books I need To Read", "The Subtle Art Of Not Giving A Fuck");
+        assertEquals(2, entryRepository.count());
+
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+           entryServices.findByTitle("My GirlFriends");
+        });
+        assertEquals("No entry found with title: My GirlFriends", exception.getMessage());
+    }
+
+    @Test
+    public void test_To_Delete_An_Entry_In_The_EntryRepository(){
+
     }
 }

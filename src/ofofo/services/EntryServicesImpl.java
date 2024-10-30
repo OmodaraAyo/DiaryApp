@@ -17,11 +17,15 @@ public class EntryServicesImpl implements EntryServices {
     public void save(String title, String body) {
         entryRepository.save(new Entry(title, body));
 //        count++;
+        System.out.println("Saved successfully");
     }
 
     @Override
     public Entry findByTitle(String title) {
-        return null;
+        if(entryRepository.findByTitle(title) == null){
+            throw new RuntimeException("No entry found with title: " + title);
+        }
+        return entryRepository.findByTitle(title);
     }
 
     @Override
