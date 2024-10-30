@@ -7,7 +7,7 @@ import ofofo.data.repositories.EntryRepositoryImpl;
 
 public class EntryServicesImpl implements EntryServices {
     private final EntryRepository entryRepository;
-//    private long count = 0;
+    private long count = 0;
 
     public EntryServicesImpl(EntryRepository entryRepository) {
         this.entryRepository = entryRepository;
@@ -16,7 +16,7 @@ public class EntryServicesImpl implements EntryServices {
     @Override
     public void save(String title, String body) {
         entryRepository.save(new Entry(title, body));
-//        count++;
+        count++;
         System.out.println("Saved successfully");
     }
 

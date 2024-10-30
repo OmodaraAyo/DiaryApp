@@ -1,12 +1,10 @@
 package ofofo.data.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class Diary {
     private String userName;
-    private String loginPassword;
+    private String password;
+    private boolean isLocked = false;
 
     public Diary() {
 
@@ -17,15 +15,38 @@ public class Diary {
 
     public Diary(String userName, String loginPassword) {
         this.userName = userName;
-        this.loginPassword = loginPassword;
+        this.password = loginPassword;
     }
 
-    public String getLoginPassword() {
-        return loginPassword;
+    public boolean isLocked() {
+        return isLocked;
     }
 
-    public void setLoginPassword(String loginPassword) {
-        this.loginPassword = loginPassword;
+    public void lockDiary(){
+        isLocked = true;
+    }
+
+    public void unlockDiary() {
+        if(password == null) {
+            isLocked = false;
+        }
+        else {
+            throw new RuntimeException("Provide password to unlock the diary");
+        }
+    }
+    public void unlockDiary(String password) {
+        if(!password.equals(this.password)) {
+            throw new RuntimeException("Incorrect password");
+        }
+        isLocked = false;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String loginPassword) {
+        this.password = loginPassword;
     }
 
     public String getUserName() {
@@ -38,6 +59,6 @@ public class Diary {
 
     @Override
     public String toString() {
-        return "Diary{" + "userName: " + userName + ", loginPassword: " + loginPassword + '}';
+        return "Diary{" + "userName: " + userName + ", loginPassword: " + password + '}';
     }
 }

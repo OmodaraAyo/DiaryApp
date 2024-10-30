@@ -32,6 +32,6 @@ public class Entry {
 
     @Override
     public String toString() {
-        return getTitle() +", "+ getContent();
+        return getTitle() +", "+ getContent()+" Date Created: "+getDate();
     }
 }
